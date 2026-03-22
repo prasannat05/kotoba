@@ -1,0 +1,79 @@
+📱 KOTOBA – LEARN JAPANESE (DOCUMENTATION)
+=========================================
+
+Developed by: VAP Studios
+Target Platform: Android 8.0+ (API 26+)
+Architecture: MVVM + Jetpack Compose + Room DB
+
+-----------------------------------------
+🎯 1. PROJECT OVERVIEW
+-----------------------------------------
+Kotoba is a professional-grade Japanese learning application focused on mastering Hiragana, Katakana, essential vocabulary, and common survival phrases. It uses a structured, flashcard-based approach with integrated assessment and writing practice modules.
+
+-----------------------------------------
+🚀 2. CORE FEATURES
+-----------------------------------------
+
+✅ ALPHABET MASTERY
+- Full dataset for Hiragana and Katakana (46 base characters + Dakuten/Handakuten).
+- Interactive 3D flip-flashcards for active recall.
+- PERSISTENT REFERENCE: A core feature that keeps Romaji and Phonetic guides visible at all times below the cards.
+
+✅ VOCABULARY & SENTENCES
+- 8 Vocabulary Categories: Greetings, Numbers, Colors, Family, Food, Places, Objects, Body Parts.
+- Survival Sentences: 50+ practical phrases for introductions, shopping, travel, and emergencies.
+- Context-Aware Quizzes: MCQ tests that adapt their question format based on content type.
+
+✅ WRITING PRACTICE
+- Canvas-based drawing module for every character.
+- Faint stroke-order reference guides in the background.
+- Simple clear and navigate controls for iterative practice.
+
+✅ PROGRESS TRACKING
+- Room Database: Locally stores all user progress, scores, and accuracy metrics.
+- XP System: 10 XP per character learned; 5 XP per correct quiz answer + performance bonuses.
+- Daily Streaks: Motivation system to encourage daily learning habits.
+
+-----------------------------------------
+🏗️ 3. TECHNICAL ARCHITECTURE
+-----------------------------------------
+
+- UI Layer: 100% Jetpack Compose with Material 3 Design.
+- Navigation: Centralized NavHost handling 7 study and profile screens.
+- Data Layer:
+    - AlphabetData.kt: Hardcoded high-quality Japanese dataset.
+    - KotobaDatabase: SQLite via Room for persistent user-specific data.
+- State Management: ViewModel + StateFlow for reactive, lifecycle-aware UI updates.
+
+-----------------------------------------
+🎨 4. DESIGN & BRANDING
+-----------------------------------------
+
+- Palette: Red Japanese (#BC002D), Beige Paper (#F5F5DC), Ink Black (#2B2B2B).
+- Typography: Clear sans-serif for English; high-contrast Japanese characters for readability.
+- Adaptive Icon: Features the "あ" character inside a stylized red sun.
+
+-----------------------------------------
+🔄 5. USER WORKFLOW
+-----------------------------------------
+
+1. Dashboard: View stats (XP, Streaks) and "Resume Learning".
+2. Category Selection: Choose Hiragana, Katakana, Vocabulary, or Sentences.
+3. Chapter List: Select a specific sub-topic (e.g., "K-Row" or "Food & Drink").
+4. Lesson: Swipe through cards with persistent English references and writing practice.
+5. Quiz: Take a 4-option MCQ to test knowledge.
+6. Results: View score, earn XP, and update progress in the database.
+7. Profile: Track cumulative learning stats and chapter completion.
+
+-----------------------------------------
+📦 6. EXPORT & DEPLOYMENT
+-----------------------------------------
+The app is configured as a Universal APK (Split APKs disabled) for easy sharing between devices without "Invalid Package" errors.
+
+- Minimum SDK: 26
+- Target SDK: 35
+- Language: Kotlin 2.0
+- Offline Mode: 100% functional without Internet.
+
+=========================================
+End of Documentation

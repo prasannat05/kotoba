@@ -1,0 +1,14 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <!-- Red Circle Background for the logo element -->
+    <path
+        android:fillColor="#BC002D"
+        android:pathData="M54,24c16.57,0 30,13.43 30,30s-13.43,30 -30,30s-30,-13.43 -30,-30s13.43,-30 30,-30z" />
+    <!-- Stylized 'あ' (Simplified representation) -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M54,40h12v4h-12zM48,48h18v4h-18zM54,34v32h4v-32zM44,58c0,4.42 3.58,8 8,8s8,-3.58 8,-8s-3.58,-8 -8,-8s-8,3.58 -8,8z" />
+</vector>
