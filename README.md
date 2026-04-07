@@ -3,7 +3,7 @@
 ## Overview
 Kotoba is a structured Japanese learning application designed to help users master Hiragana and Katakana through an interactive, flashcard-based system combined with quizzes, writing practice, and progress tracking.
 
-- App Link : https://tinyurl.com/Kotoba-app
+- App Link : [Kotoba](https://drive.google.com/file/d/1eymI8tPQK3H9MhdWb56rf6pGZQsb9FUI/view?usp=sharing)
 ## Core Features
 
 ### Alphabet Mastery (Hiragana and Katakana)
