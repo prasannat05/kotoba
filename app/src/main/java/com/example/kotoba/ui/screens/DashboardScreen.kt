@@ -14,6 +14,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.example.kotoba.data.AlphabetData
 import com.example.kotoba.ui.MainViewModel
@@ -52,12 +53,12 @@ fun DashboardScreen(
             Card(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(180.dp),
+                    .heightIn(min = 160.dp),
                 colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.primary)
             ) {
                 Column(
                     modifier = Modifier
-                        .fillMaxSize()
+                        .fillMaxWidth()
                         .padding(24.dp),
                     verticalArrangement = Arrangement.Center
                 ) {
@@ -100,11 +101,15 @@ fun DashboardScreen(
 
             if (allProgress.isEmpty()) {
                 Box(modifier = Modifier.weight(1f), contentAlignment = Alignment.Center) {
-                    Text("No recent activity. Start learning today!", color = MaterialTheme.colorScheme.onSurfaceVariant)
+                    Text(
+                        "No recent activity. Start learning today!", 
+                        color = MaterialTheme.colorScheme.onSurfaceVariant,
+                        textAlign = TextAlign.Center
+                    )
                 }
             } else {
                 LazyColumn(
-                    modifier = Modifier.fillMaxWidth()
+                    modifier = Modifier.fillMaxWidth().weight(1f)
                 ) {
                     val recentProgress = allProgress.sortedByDescending { it.lastStudied }.take(5)
                     items(recentProgress) { progress ->
@@ -147,15 +152,25 @@ fun RecentChapterCard(
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.SpaceBetween
         ) {
-            Column {
-                Text(chapterName, style = MaterialTheme.typography.titleMedium, fontWeight = FontWeight.Bold)
-                Text(type, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.primary)
+            Column(modifier = Modifier.weight(1f)) {
+                Text(
+                    text = chapterName, 
+                    style = MaterialTheme.typography.titleMedium, 
+                    fontWeight = FontWeight.Bold,
+                    maxLines = 1
+                )
+                Text(
+                    text = type, 
+                    style = MaterialTheme.typography.bodySmall, 
+                    color = MaterialTheme.colorScheme.primary
+                )
             }
+            Spacer(modifier = Modifier.width(16.dp))
             Column(horizontalAlignment = Alignment.End) {
-                Text("Best Score: $score", style = MaterialTheme.typography.bodyMedium)
+                Text("Score: $score", style = MaterialTheme.typography.bodyMedium)
                 LinearProgressIndicator(
                     progress = { accuracy },
-                    modifier = Modifier.width(100.dp).height(8.dp).padding(top = 4.dp),
+                    modifier = Modifier.width(80.dp).height(6.dp).padding(top = 4.dp),
                 )
             }
         }

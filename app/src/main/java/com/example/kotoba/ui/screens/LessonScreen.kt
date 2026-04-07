@@ -4,6 +4,8 @@ import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.gestures.detectHorizontalDragGestures
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.*
@@ -15,6 +17,7 @@ import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.kotoba.data.Chapter
@@ -41,7 +44,7 @@ fun LessonScreen(
     Scaffold(
         topBar = {
             TopAppBar(
-                title = { Text(chapter.name) },
+                title = { Text(chapter.name, maxLines = 1, overflow = TextOverflow.Ellipsis) },
                 navigationIcon = {
                     IconButton(onClick = onBack) {
                         Icon(Icons.AutoMirrored.Filled.ArrowBack, contentDescription = "Back")
@@ -63,20 +66,21 @@ fun LessonScreen(
             modifier = Modifier
                 .padding(padding)
                 .fillMaxSize()
-                .padding(24.dp),
+                .verticalScroll(rememberScrollState())
+                .padding(horizontal = 24.dp, vertical = 16.dp),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             LinearProgressIndicator(
                 progress = { (currentIndex + 1).toFloat() / chapter.characters.size },
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(8.dp)
-                    .padding(bottom = 32.dp)
+                    .height(6.dp)
+                    .padding(bottom = 24.dp)
             )
 
             Box(
                 modifier = Modifier
-                    .weight(1f)
+                    .height(300.dp) // Fixed height for the card container
                     .fillMaxWidth()
                     .pointerInput(currentIndex) {
                         detectHorizontalDragGestures { change, dragAmount ->
@@ -93,9 +97,9 @@ fun LessonScreen(
                 AnimatedFlashcard(character = currentCharacter)
             }
 
-            Spacer(modifier = Modifier.height(32.dp))
+            Spacer(modifier = Modifier.height(24.dp))
 
-            // English Reference always visible below the card
+            // Reference Card
             Card(
                 modifier = Modifier.fillMaxWidth().padding(bottom = 16.dp),
                 colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.secondaryContainer)
@@ -107,19 +111,29 @@ fun LessonScreen(
                     Text(
                         text = if (currentCharacter.type == KanaType.HIRAGANA || currentCharacter.type == KanaType.KATAKANA) 
                             "Romaji Reference" else "English Translation",
-                        style = MaterialTheme.typography.labelMedium,
-                        color = MaterialTheme.colorScheme.primary
+                        style = MaterialTheme.typography.labelSmall,
+                        color = MaterialTheme.colorScheme.primary,
+                        textAlign = TextAlign.Center,
+                        fontWeight = FontWeight.Bold
                     )
+                    Spacer(modifier = Modifier.height(8.dp))
                     Text(
                         text = currentCharacter.romaji,
-                        style = MaterialTheme.typography.headlineMedium,
-                        fontWeight = FontWeight.Bold,
-                        color = MaterialTheme.colorScheme.onSecondaryContainer
+                        style = MaterialTheme.typography.headlineSmall.copy(
+                            fontSize = if (currentCharacter.romaji.length > 20) 18.sp else 24.sp,
+                            fontWeight = FontWeight.ExtraBold,
+                            lineHeight = 28.sp
+                        ),
+                        color = MaterialTheme.colorScheme.onSecondaryContainer,
+                        textAlign = TextAlign.Center,
+                        modifier = Modifier.fillMaxWidth()
                     )
+                    Spacer(modifier = Modifier.height(8.dp))
                     Text(
                         text = "Pronunciation: ${currentCharacter.phonetic}",
-                        style = MaterialTheme.typography.bodyMedium,
-                        color = MaterialTheme.colorScheme.onSecondaryContainer.copy(alpha = 0.7f)
+                        style = MaterialTheme.typography.bodySmall,
+                        color = MaterialTheme.colorScheme.onSecondaryContainer.copy(alpha = 0.8f),
+                        textAlign = TextAlign.Center
                     )
                 }
             }
@@ -131,7 +145,7 @@ fun LessonScreen(
                 Button(
                     onClick = { if (currentIndex > 0) currentIndex-- },
                     enabled = currentIndex > 0,
-                    modifier = Modifier.weight(1f).padding(end = 8.dp)
+                    modifier = Modifier.weight(1f).padding(end = 8.dp).height(48.dp)
                 ) {
                     Text("Previous")
                 }
@@ -139,28 +153,28 @@ fun LessonScreen(
                 if (currentIndex < chapter.characters.size - 1) {
                     Button(
                         onClick = { currentIndex++ },
-                        modifier = Modifier.weight(1f).padding(start = 8.dp)
+                        modifier = Modifier.weight(1f).padding(start = 8.dp).height(48.dp)
                     ) {
                         Text("Next")
                     }
                 } else {
                     Button(
                         onClick = onQuizStart,
-                        modifier = Modifier.weight(1f).padding(start = 8.dp),
+                        modifier = Modifier.weight(1f).padding(start = 8.dp).height(48.dp),
                         colors = ButtonDefaults.buttonColors(containerColor = MaterialTheme.colorScheme.primary)
                     ) {
                         Icon(Icons.Default.PlayArrow, contentDescription = null)
                         Spacer(modifier = Modifier.width(4.dp))
-                        Text("Start Quiz")
+                        Text("Quiz")
                     }
                 }
             }
             
-            Spacer(modifier = Modifier.height(16.dp))
+            Spacer(modifier = Modifier.height(12.dp))
             
             OutlinedButton(
                 onClick = onWritingPractice,
-                modifier = Modifier.fillMaxWidth()
+                modifier = Modifier.fillMaxWidth().height(48.dp)
             ) {
                 Icon(Icons.Default.Create, contentDescription = null)
                 Spacer(modifier = Modifier.width(8.dp))
@@ -181,44 +195,65 @@ fun AnimatedFlashcard(character: KanaCharacter) {
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .fillMaxHeight(0.8f) // Adjusted to make room for the persistent reference card
+            .height(280.dp)
             .graphicsLayer {
                 rotationY = rotation
                 cameraDistance = 12f * density
             }
             .clickable { rotated = !rotated },
-        elevation = CardDefaults.cardElevation(defaultElevation = 8.dp),
+        elevation = CardDefaults.cardElevation(defaultElevation = 6.dp),
         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface)
     ) {
-        Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
+        Box(modifier = Modifier.fillMaxSize().padding(16.dp), contentAlignment = Alignment.Center) {
             if (rotation <= 90f) {
-                // Front Side
+                // Front Side - Fixed Font Sizes and centered
                 Text(
                     text = character.japanese,
                     style = MaterialTheme.typography.displayLarge.copy(
-                        fontSize = if (character.japanese.length > 5) 48.sp else 120.sp
+                        fontSize = when {
+                            character.japanese.length >= 15 -> 20.sp
+                            character.japanese.length >= 10 -> 24.sp
+                            character.japanese.length >= 7 -> 32.sp
+                            character.japanese.length >= 5 -> 42.sp
+                            character.japanese.length >= 3 -> 56.sp
+                            character.japanese.length == 2 -> 80.sp
+                            else -> 100.sp
+                        },
+                        lineHeight = when {
+                            character.japanese.length >= 7 -> 32.sp
+                            character.japanese.length >= 4 -> 48.sp
+                            else -> 80.sp
+                        }
                     ),
                     color = MaterialTheme.colorScheme.primary,
                     textAlign = TextAlign.Center,
-                    modifier = Modifier.padding(16.dp)
+                    modifier = Modifier.fillMaxWidth(),
+                    softWrap = true,
+                    overflow = TextOverflow.Visible
                 )
             } else {
                 // Back Side
                 Column(
                     modifier = Modifier.graphicsLayer { rotationY = 180f },
-                    horizontalAlignment = Alignment.CenterHorizontally
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    verticalArrangement = Arrangement.Center
                 ) {
                     Text(
                         text = character.romaji,
-                        style = MaterialTheme.typography.headlineLarge,
-                        fontWeight = FontWeight.Bold,
-                        textAlign = TextAlign.Center
+                        style = MaterialTheme.typography.headlineMedium.copy(
+                            fontSize = if (character.romaji.length > 15) 22.sp else 30.sp,
+                            fontWeight = FontWeight.Bold
+                        ),
+                        textAlign = TextAlign.Center,
+                        modifier = Modifier.fillMaxWidth()
                     )
+                    Spacer(modifier = Modifier.height(12.dp))
                     Text(
-                        text = "Pronunciation: ${character.phonetic}",
+                        text = character.phonetic,
                         style = MaterialTheme.typography.bodyLarge,
                         color = MaterialTheme.colorScheme.onSurfaceVariant,
-                        textAlign = TextAlign.Center
+                        textAlign = TextAlign.Center,
+                        modifier = Modifier.fillMaxWidth()
                     )
                 }
             }

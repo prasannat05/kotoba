@@ -1,6 +1,8 @@
 package com.example.kotoba.ui.screens
 
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material3.*
@@ -65,6 +67,7 @@ fun QuizScreen(
                 modifier = Modifier
                     .padding(padding)
                     .fillMaxSize()
+                    .verticalScroll(rememberScrollState())
                     .padding(24.dp),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
@@ -87,22 +90,36 @@ fun QuizScreen(
                 Text(
                     text = currentCharacter.japanese,
                     style = MaterialTheme.typography.displayLarge.copy(
-                        fontSize = if (currentCharacter.japanese.length > 3) 48.sp else 100.sp
+                        fontSize = when {
+                            currentCharacter.japanese.length > 12 -> 32.sp
+                            currentCharacter.japanese.length > 8 -> 44.sp
+                            currentCharacter.japanese.length > 4 -> 60.sp
+                            else -> 100.sp
+                        }
                     ),
                     color = MaterialTheme.colorScheme.primary,
-                    textAlign = TextAlign.Center
+                    textAlign = TextAlign.Center,
+                    modifier = Modifier.fillMaxWidth().padding(horizontal = 8.dp)
                 )
 
-                Spacer(modifier = Modifier.height(48.dp))
+                Spacer(modifier = Modifier.height(32.dp))
 
                 options.forEach { option ->
+                    val isSelected = selectedAnswer == option
+                    val isCorrectOption = option == currentCharacter.romaji
+                    
                     val color = when {
-                        selectedAnswer == option && option == currentCharacter.romaji -> Color(0xFF4CAF50)
-                        selectedAnswer == option && option != currentCharacter.romaji -> MaterialTheme.colorScheme.error
-                        selectedAnswer != null && option == currentCharacter.romaji -> Color(0xFF4CAF50)
+                        isSelected && isCorrectOption -> Color(0xFF4CAF50)
+                        isSelected && !isCorrectOption -> MaterialTheme.colorScheme.error
+                        selectedAnswer != null && isCorrectOption -> Color(0xFF4CAF50)
                         else -> MaterialTheme.colorScheme.surfaceVariant
                     }
                     
+                    val contentColor = when {
+                        selectedAnswer != null -> Color.White
+                        else -> MaterialTheme.colorScheme.onSurfaceVariant
+                    }
+
                     Button(
                         onClick = {
                             if (selectedAnswer == null) {
@@ -117,21 +134,24 @@ fun QuizScreen(
                         },
                         modifier = Modifier
                             .fillMaxWidth()
-                            .padding(vertical = 4.dp),
+                            .padding(vertical = 4.dp)
+                            .heightIn(min = 56.dp),
                         colors = ButtonDefaults.buttonColors(
                             containerColor = color,
-                            contentColor = if (selectedAnswer != null) Color.White else MaterialTheme.colorScheme.onSurfaceVariant
-                        )
+                            contentColor = contentColor
+                        ),
+                        shape = MaterialTheme.shapes.medium
                     ) {
                         Text(
                             text = option,
                             style = MaterialTheme.typography.bodyLarge,
-                            textAlign = TextAlign.Center
+                            textAlign = TextAlign.Center,
+                            modifier = Modifier.padding(horizontal = 8.dp)
                         )
                     }
                 }
 
-                Spacer(modifier = Modifier.weight(1f))
+                Spacer(modifier = Modifier.height(32.dp))
 
                 if (selectedAnswer != null) {
                     Button(
@@ -178,7 +198,8 @@ fun QuizResult(score: Int, total: Int, onComplete: () -> Unit) {
                 else -> "Keep learning, you'll get there!"
             },
             style = MaterialTheme.typography.titleLarge,
-            color = MaterialTheme.colorScheme.onSurfaceVariant
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
+            textAlign = TextAlign.Center
         )
 
         Spacer(modifier = Modifier.height(48.dp))

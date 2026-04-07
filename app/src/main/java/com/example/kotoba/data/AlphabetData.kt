@@ -114,6 +114,31 @@ object AlphabetData {
             KanaCharacter("ぷ", "pu", "poo", KanaType.HIRAGANA),
             KanaCharacter("ぺ", "pe", "peh", KanaType.HIRAGANA),
             KanaCharacter("ぽ", "po", "poh", KanaType.HIRAGANA)
+        )),
+        Chapter(13, "Contracted Sounds (K, S, T)", KanaType.HIRAGANA, listOf(
+            KanaCharacter("きゃ", "kya", "kyah", KanaType.HIRAGANA),
+            KanaCharacter("きゅ", "kyu", "kyoo", KanaType.HIRAGANA),
+            KanaCharacter("きょ", "kyo", "kyoh", KanaType.HIRAGANA),
+            KanaCharacter("しゃ", "sha", "shah", KanaType.HIRAGANA),
+            KanaCharacter("しゅ", "shu", "shoo", KanaType.HIRAGANA),
+            KanaCharacter("しょ", "sho", "shoh", KanaType.HIRAGANA),
+            KanaCharacter("ちゃ", "cha", "chah", KanaType.HIRAGANA),
+            KanaCharacter("ちゅ", "chu", "choo", KanaType.HIRAGANA),
+            KanaCharacter("ちょ", "cho", "choh", KanaType.HIRAGANA)
+        )),
+        Chapter(14, "Contracted Sounds (N, H, M, R)", KanaType.HIRAGANA, listOf(
+            KanaCharacter("にゃ", "nya", "nyah", KanaType.HIRAGANA),
+            KanaCharacter("にゅ", "nyu", "nyoo", KanaType.HIRAGANA),
+            KanaCharacter("にょ", "nyo", "nyoh", KanaType.HIRAGANA),
+            KanaCharacter("ひゃ", "hya", "hyah", KanaType.HIRAGANA),
+            KanaCharacter("ひゅ", "hyu", "hyoo", KanaType.HIRAGANA),
+            KanaCharacter("ひょ", "hyo", "hyoh", KanaType.HIRAGANA),
+            KanaCharacter("みゃ", "mya", "myah", KanaType.HIRAGANA),
+            KanaCharacter("みゅ", "myu", "myoo", KanaType.HIRAGANA),
+            KanaCharacter("みょ", "myo", "myoh", KanaType.HIRAGANA),
+            KanaCharacter("りゃ", "rya", "ryah", KanaType.HIRAGANA),
+            KanaCharacter("りゅ", "ryu", "ryoo", KanaType.HIRAGANA),
+            KanaCharacter("りょ", "ryo", "ryoh", KanaType.HIRAGANA)
         ))
     )
 
@@ -209,9 +234,32 @@ object AlphabetData {
             KanaCharacter("ボ", "bo", "boh", KanaType.KATAKANA),
             KanaCharacter("パ", "pa", "pah", KanaType.KATAKANA),
             KanaCharacter("ピ", "pi", "pee", KanaType.KATAKANA),
-            KanaCharacter("プ", "pu", "poo", KanaType.KATAKANA),
+            KanaCharacter("ぷ", "pu", "poo", KanaType.KATAKANA),
             KanaCharacter("ペ", "pe", "peh", KanaType.KATAKANA),
             KanaCharacter("ポ", "po", "poh", KanaType.KATAKANA)
+        )),
+        Chapter(113, "Contracted Sounds (K, S, T)", KanaType.KATAKANA, listOf(
+            KanaCharacter("キャ", "kya", "kyah", KanaType.KATAKANA),
+            KanaCharacter("キュ", "kyu", "kyoo", KanaType.KATAKANA),
+            KanaCharacter("キョ", "kyo", "kyoh", KanaType.KATAKANA),
+            KanaCharacter("シャ", "sha", "shah", KanaType.KATAKANA),
+            KanaCharacter("シュ", "shu", "shoo", KanaType.KATAKANA),
+            KanaCharacter("ショ", "sho", "shoh", KanaType.KATAKANA),
+            KanaCharacter("チャ", "cha", "chah", KanaType.KATAKANA),
+            KanaCharacter("チュ", "chu", "choo", KanaType.KATAKANA),
+            KanaCharacter("チョ", "cho", "choh", KanaType.KATAKANA)
+        )),
+        Chapter(114, "Extended Katakana", KanaType.KATAKANA, listOf(
+            KanaCharacter("ファ", "fa", "fah", KanaType.KATAKANA),
+            KanaCharacter("フィ", "fi", "fee", KanaType.KATAKANA),
+            KanaCharacter("フェ", "fe", "feh", KanaType.KATAKANA),
+            KanaCharacter("フォ", "fo", "foh", KanaType.KATAKANA),
+            KanaCharacter("ティ", "ti", "tee", KanaType.KATAKANA),
+            KanaCharacter("ディ", "di", "dee", KanaType.KATAKANA),
+            KanaCharacter("デュ", "du", "dyoo", KanaType.KATAKANA),
+            KanaCharacter("ウィ", "wi", "wee", KanaType.KATAKANA),
+            KanaCharacter("ウェ", "we", "weh", KanaType.KATAKANA),
+            KanaCharacter("ウォ", "wo", "woh", KanaType.KATAKANA)
         ))
     )
 
@@ -296,6 +344,51 @@ object AlphabetData {
             KanaCharacter("くち", "Mouth", "kuchi", KanaType.VOCABULARY),
             KanaCharacter("て", "Hand", "te", KanaType.VOCABULARY),
             KanaCharacter("あし", "Leg / Foot", "ashi", KanaType.VOCABULARY)
+        )),
+        Chapter(209, "Animals", KanaType.VOCABULARY, listOf(
+            KanaCharacter("うさぎ", "Rabbit", "usagi", KanaType.VOCABULARY),
+            KanaCharacter("とり", "Bird", "tori", KanaType.VOCABULARY),
+            KanaCharacter("さる", "Monkey", "saru", KanaType.VOCABULARY),
+            KanaCharacter("うま", "Horse", "uma", KanaType.VOCABULARY),
+            KanaCharacter("うし", "Cow", "ushi", KanaType.VOCABULARY),
+            KanaCharacter("ぶた", "Pig", "buta", KanaType.VOCABULARY),
+            KanaCharacter("ぞう", "Elephant", "zou", KanaType.VOCABULARY),
+            KanaCharacter("へび", "Snake", "hebi", KanaType.VOCABULARY)
+        )),
+        Chapter(210, "Professions", KanaType.VOCABULARY, listOf(
+            KanaCharacter("いしゃ", "Doctor", "isha", KanaType.VOCABULARY),
+            KanaCharacter("かんごし", "Nurse", "kangoshi", KanaType.VOCABULARY),
+            KanaCharacter("きょうし", "Teacher", "kyoushi", KanaType.VOCABULARY),
+            KanaCharacter("がくせい", "Student", "gakusei", KanaType.VOCABULARY),
+            KanaCharacter("けいさつかん", "Police Officer", "keisatsukan", KanaType.VOCABULARY),
+            KanaCharacter("ぎんこういん", "Banker", "ginkouin", KanaType.VOCABULARY),
+            KanaCharacter("かいしゃいん", "Office Worker", "kaishain", KanaType.VOCABULARY)
+        )),
+        Chapter(211, "Time & Days", KanaType.VOCABULARY, listOf(
+            KanaCharacter("きょう", "Today", "kyou", KanaType.VOCABULARY),
+            KanaCharacter("あした", "Tomorrow", "ashita", KanaType.VOCABULARY),
+            KanaCharacter("きのう", "Yesterday", "kinou", KanaType.VOCABULARY),
+            KanaCharacter("いま", "Now", "ima", KanaType.VOCABULARY),
+            KanaCharacter("じ", "O'clock", "ji", KanaType.VOCABULARY),
+            KanaCharacter("ふん", "Minute", "fun", KanaType.VOCABULARY),
+            KanaCharacter("げつようび", "Monday", "getsuyoubi", KanaType.VOCABULARY),
+            KanaCharacter("かようび", "Tuesday", "kayoubi", KanaType.VOCABULARY),
+            KanaCharacter("すいようび", "Wednesday", "suiyoubi", KanaType.VOCABULARY),
+            KanaCharacter("もくようび", "Thursday", "mokuyoubi", KanaType.VOCABULARY),
+            KanaCharacter("きんようび", "Friday", "kinyoubi", KanaType.VOCABULARY),
+            KanaCharacter("どようび", "Saturday", "doyoubi", KanaType.VOCABULARY),
+            KanaCharacter("にちようび", "Sunday", "nichiyoubi", KanaType.VOCABULARY)
+        )),
+        Chapter(212, "Nature & Weather", KanaType.VOCABULARY, listOf(
+            KanaCharacter("やま", "Mountain", "yama", KanaType.VOCABULARY),
+            KanaCharacter("かわ", "River", "kawa", KanaType.VOCABULARY),
+            KanaCharacter("うみ", "Sea / Ocean", "umi", KanaType.VOCABULARY),
+            KanaCharacter("そら", "Sky", "sora", KanaType.VOCABULARY),
+            KanaCharacter("あめ", "Rain", "ame", KanaType.VOCABULARY),
+            KanaCharacter("ゆき", "Snow", "yuki", KanaType.VOCABULARY),
+            KanaCharacter("かぜ", "Wind", "kaze", KanaType.VOCABULARY),
+            KanaCharacter("はれ", "Sunny", "hare", KanaType.VOCABULARY),
+            KanaCharacter("くもり", "Cloudy", "kumori", KanaType.VOCABULARY)
         ))
     )
 
@@ -367,7 +460,7 @@ object AlphabetData {
             KanaCharacter("たすけてください！", "Help me, please!", "tasukete kudasai", KanaType.SENTENCE),
             KanaCharacter("きぶんがわるいです。", "I feel sick.", "kibun ga warui desu", KanaType.SENTENCE),
             KanaCharacter("びょういんにいきたいです。", "I want to go to the hospital.", "byouin ni ikitai desu", KanaType.SENTENCE),
-            KanaCharacter("けいさつをよんでください。", "Call the police, please.", "keisatsu o yonde kudasai", KanaType.SENTENCE),
+            KanaCharacter("けいさつをよんでください。", "Call the police, please.", "keisatsukan o yonde kudasai", KanaType.SENTENCE),
             KanaCharacter("なくしました。", "I lost it.", "nakushimashita", KanaType.SENTENCE),
             KanaCharacter("みちになよいました。", "I am lost (street).", "michi ni mayoimashita", KanaType.SENTENCE)
         )),
@@ -378,6 +471,27 @@ object AlphabetData {
             KanaCharacter("おなまえは？", "Your name?", "o-namae wa?", KanaType.SENTENCE),
             KanaCharacter("いいですね！", "That's good!", "ii desu ne!", KanaType.SENTENCE),
             KanaCharacter("そうですか。", "I see / Is that so?", "sou desu ka", KanaType.SENTENCE)
+        )),
+        Chapter(310, "At a Restaurant", KanaType.SENTENCE, listOf(
+            KanaCharacter("ちゅうもんをおねがいします。", "I'd like to order, please.", "chuumon o onegaishimasu", KanaType.SENTENCE),
+            KanaCharacter("おすすめはなんですか？", "What do you recommend?", "osusume wa nan desu ka?", KanaType.SENTENCE),
+            KanaCharacter("おかいけいをおねがいします。", "Check, please.", "okaikei o onegaishimasu", KanaType.SENTENCE),
+            KanaCharacter("クレジットカードはつかえますか？", "Do you accept credit cards?", "kurejitto kaado wa tsukaemasu ka?", KanaType.SENTENCE),
+            KanaCharacter("えいごのメニューはありますか？", "Is there an English menu?", "eigo no menyuu wa arimasu ka?", KanaType.SENTENCE)
+        )),
+        Chapter(311, "Shopping Phrases", KanaType.SENTENCE, listOf(
+            KanaCharacter("みているだけです。", "I'm just looking.", "miteiru dake desu", KanaType.SENTENCE),
+            KanaCharacter("これをみせてください。", "Please show me this.", "kore o misete kudasai", KanaType.SENTENCE),
+            KanaCharacter("ほかのいろはありますか？", "Do you have any other colors?", "hoka no iro wa arimasu ka?", KanaType.SENTENCE),
+            KanaCharacter("ちょっとたかいです。", "It's a bit expensive.", "chotto takai desu", KanaType.SENTENCE),
+            KanaCharacter("やすくなりますか？", "Can you make it cheaper?", "yasukunaru ka?", KanaType.SENTENCE)
+        )),
+        Chapter(312, "Health & Feelings", KanaType.SENTENCE, listOf(
+            KanaCharacter("つかれました。", "I'm tired.", "tsukaremashita", KanaType.SENTENCE),
+            KanaCharacter("おなかがいたいです。", "My stomach hurts.", "onaka ga itai desu", KanaType.SENTENCE),
+            KanaCharacter("ねむいです。", "I'm sleepy.", "nemui desu", KanaType.SENTENCE),
+            KanaCharacter("しあわせです。", "I'm happy.", "shiawase desu", KanaType.SENTENCE),
+            KanaCharacter("かなしいです。", "I'm sad.", "kanashii desu", KanaType.SENTENCE)
         ))
     )
 

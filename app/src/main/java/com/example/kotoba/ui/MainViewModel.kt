@@ -10,12 +10,14 @@ import com.example.kotoba.data.local.CharacterProgress
 import com.example.kotoba.data.local.KotobaDatabase
 import com.example.kotoba.data.local.UserProgress
 import com.example.kotoba.data.local.UserProfile
+import com.example.kotoba.util.NotificationHelper
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import java.util.*
 
 class MainViewModel(application: Application) : AndroidViewModel(application) {
     private val dao = KotobaDatabase.getDatabase(application).kotobaDao()
+    private val notificationHelper = NotificationHelper(application)
 
     val userProfile: StateFlow<UserProfile?> = dao.getUserProfile()
         .stateIn(viewModelScope, SharingStarted.WhileSubscribed(5000), null)
@@ -79,6 +81,12 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
                 lastStudied = System.currentTimeMillis()
             )
             dao.updateProgress(newProgress)
+            
+            // Show notification
+            val chapter = AlphabetData.allChapters.find { it.id == chapterId }
+            chapter?.let {
+                notificationHelper.showCompletionNotification(it.name, score, total)
+            }
             
             userProfile.value?.let { profile ->
                 val xpGained = score * 5 + (if (accuracy == 1f) 50 else 0)

@@ -19,9 +19,11 @@ import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.example.kotoba.data.Chapter
+import com.example.kotoba.data.KanaType
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -60,7 +62,9 @@ fun WritingPracticeScreen(
         ) {
             Text(
                 text = "Draw: ${currentCharacter.romaji}",
-                style = MaterialTheme.typography.titleLarge
+                style = MaterialTheme.typography.titleLarge,
+                textAlign = TextAlign.Center,
+                fontWeight = FontWeight.Bold
             )
             
             Spacer(modifier = Modifier.height(16.dp))
@@ -73,24 +77,34 @@ fun WritingPracticeScreen(
                     .background(MaterialTheme.colorScheme.surfaceVariant, shape = MaterialTheme.shapes.medium),
                 contentAlignment = Alignment.Center
             ) {
-                // Background reference character
+                // Background reference character - scaling font size more precisely
                 Text(
                     text = currentCharacter.japanese,
                     style = MaterialTheme.typography.displayLarge.copy(
-                        fontSize = 200.sp,
-                        color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.1f)
-                    )
+                        fontSize = when {
+                            currentCharacter.japanese.length >= 12 -> 24.sp
+                            currentCharacter.japanese.length >= 8 -> 32.sp
+                            currentCharacter.japanese.length >= 5 -> 48.sp
+                            currentCharacter.japanese.length == 4 -> 64.sp
+                            currentCharacter.japanese.length == 3 -> 80.sp
+                            currentCharacter.japanese.length == 2 -> 110.sp
+                            else -> 160.sp
+                        },
+                        color = MaterialTheme.colorScheme.onSurfaceVariant.copy(alpha = 0.2f)
+                    ),
+                    textAlign = TextAlign.Center,
+                    modifier = Modifier.padding(24.dp)
                 )
 
                 Canvas(
                     modifier = Modifier
                         .fillMaxSize()
-                        .pointerInput(Unit) {
+                        .pointerInput(currentIndex) { // Reset on character change
                             detectDragGestures(
                                 onDragStart = { offset ->
                                     currentPath = Path().apply { moveTo(offset.x, offset.y) }
                                 },
-                                onDrag = { change, dragAmount ->
+                                onDrag = { change, _ ->
                                     change.consume()
                                     currentPath?.lineTo(change.position.x, change.position.y)
                                     // Trigger recomposition
@@ -165,7 +179,8 @@ fun WritingPracticeScreen(
             Text(
                 "Follow the character outline as closely as possible.",
                 style = MaterialTheme.typography.bodySmall,
-                color = MaterialTheme.colorScheme.onSurfaceVariant
+                color = MaterialTheme.colorScheme.onSurfaceVariant,
+                textAlign = TextAlign.Center
             )
         }
     }
